@@ -4,13 +4,13 @@ public class Member {
 	private String name;
 	private int age;
 
-	public Member() { // ctrl + shift + s 제네레이트 컨스터럭터 유징 필드
+	public Member() { // ctrl + shift + s 제네레이트 컨스터럭터 유징 필드 //메소드 이름은 대문자로 시작되지않는다.
 		this("guest"); // 스트링 하나들어가는 생성자 호출
 	}
 	public Member(String name) {
 		this(name, 1);
 	}		
-	public Member(String name, int age) {
+	public Member(String name, int age) { 
 		this.name = name;
 		this.age = age;
 	}

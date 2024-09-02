@@ -11,7 +11,7 @@ class Student1 {
 	private int age;
 	private String subjects[];
 	private int scores[];
-	private int count;
+	private static int count;
 	
 	// setter 메소드: setName(String name), setAge(int age),  setSubjects(String subjects[]), setScores(int scores[]), setCount(int num)
 
@@ -46,13 +46,13 @@ class Student1 {
 	public void setScores(int[] scores) {
 		this.scores = scores;
 	}
-	
-	public int getCount(int num) {
+
+	public static int getCount() {
 		return count;
 	}
-	
-	public void setCount(int num) {
-		this.count = num;
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 	// 학생 수를 반환하는 정적 메소드
@@ -76,34 +76,42 @@ class Student1 {
 }
 
 public class 실습6_1객체생성자미사용 {
-	static Student1 makeStudent(String name, int age, String[] subjects, int[] scores, int value) {
+	static Student1 makeStudent(String name, int age, String[] subjects, int[] scores, int count) {
 		Student1 s = new Student1();
 		//setter를 사용한 구현
 		s.setName(name);
 		s.setAge(age);
 		s.setSubjects(subjects);
 		s.setScores(scores);
-		s.setCount(value);
+		s.setCount(count);
 		return s;
 	} 
 	//showStudents() 메소드 구현 -printStudent() 메소드를 호출하여 구현
 
-	void showStudents() {
-		
+	public static void showStudents(Student1[] students) {
+		for(Student1 s : students) {
+			s.printStudent();
+			//System.out.println("-".repeat(20));
+			System.out.println("------------------");
+		}
 	}
+	
+	
+	
+	
 	public static void main(String[] args) {
 		String[] subjects = {"수학", "국어", "영어", "과학", "역사"};
 
 		Student1[] students = {
 				makeStudent("홍길동", 21, subjects, new int[]{85, 90, 78, 88, 92}, 0),
-				//("김유신", 22, subjects, new int[]{75, 80, 85, 90, 95}, 1),
-				//("계백", 23, subjects, new int[]{65, 70, 75, 80, 85}, 2), 
-				//("강감찬", 24, subjects, new int[]{95, 92, 88, 84, 91}, 3),
-				//("을지문덕", 25, subjects, new int[]{88, 76, 85, 79, 90}, 4)
+				makeStudent("김유신", 22, subjects, new int[]{75, 80, 85, 90, 95}, 1),
+				makeStudent("계백", 23, subjects, new int[]{65, 70, 75, 80, 85}, 2), 
+				makeStudent("강감찬", 24, subjects, new int[]{95, 92, 88, 84, 91}, 3),
+				makeStudent("을지문덕", 25, subjects, new int[]{88, 76, 85, 79, 90}, 4)
 		};
 
-		int num =Student1.getCount(); //정적 메소드
-		students[0].printStudent(); //인스턴스 메소드
+		//int num =Student1.getCount(); //정적 메소드
+		//students[1].printStudent(); //인스턴스 메소드
 		// 학생 정보 출력 (예시)
 		showStudents(students);
 	}
