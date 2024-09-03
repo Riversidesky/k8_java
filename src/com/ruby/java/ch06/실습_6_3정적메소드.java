@@ -91,11 +91,11 @@ class Student3 {
 		// 6.2.2 과목별 최대/최소 점수 및 해당 학생을 출력하는 정적 메소드
 		public static void printSubjectStats(Student3[] students) {
 			System.out.println("이름"+"\t"+"수학"+"\t"+"국어"+"\t"+"영어"+"\t"+"과학"+"\t"+"역사"+"\t"+"통과여부");
-			for (ㅈ){
-				for (ㅈ) {
-					최대최소,인덱스
+			for (int i=0; i < students.length; i++){
+				for (int j=0; j < students.length; j++) {
+					//최대최소
 				}
-				System.out.println(이름[인덱스]+"\t"+최대or최소[인덱스]+"\t"+);
+
 			}
 				
 			}
