@@ -11,6 +11,14 @@ class Item2 {
 		this.price = price;
 		this.stockQuantity = stockQuantity;
 	}
+	
+	public double getPrice() {
+		return price;
+	}
+	
+	public String getName() {
+		return name;
+	}
 }
 
 	//Electronics 클래스 (Item 클래스를 상속)
@@ -52,6 +60,11 @@ abstract class Customer2 {
 		}
 
 		abstract double applyDiscount(double totalAmount);
+		
+		@Override
+		public String toString() {
+			return cname+", City : "+city+", age : "+age;
+		}
 	}
 
 	//RegularCustomer 클래스: Customer 클래스를 상속받음
@@ -64,8 +77,8 @@ class RegularCustomer extends Customer2 {
 
 		@Override
 		double applyDiscount(double totalAmount) {
-			// TODO Auto-generated method stub
-			return 0;
+			double total = totalAmount * REGULARDISCOUNT_RATE;
+			return total;
 		}
 
 
@@ -82,8 +95,8 @@ class PremiumCustomer extends Customer2 {
 
 		@Override
 		double applyDiscount(double totalAmount) {
-			// TODO Auto-generated method stub
-			return 0;
+			double total = totalAmount * PREMIUMDISCOUNT_RATE;
+			return total;
 		}
 
 	}
@@ -91,19 +104,57 @@ class PremiumCustomer extends Customer2 {
 
 	//Order 클래스
 class Order2 {
-		private Customer2 customer;
-		private Item2[] items;
-		private int[] quantities;
+		private Customer2 customer; //고객
+		private Item2[] items; //제품들
+		private int[] quantities; //주문제품수량
 		private int itemCount;
+
 		/*
 		 * Order2(),addItem()
 		 * calculateTotal(),calculateDiscountedTotal(), printOrderSummary()
 		 */
 		
-		public Order2(??, int i) {
-			// TODO Auto-generated constructor stemiumCustomerub
+		public Order2(Customer2 c, int maxIndex) {
+			this.customer = c;
+			items = new Item2[maxIndex];
+			quantities = new int[maxIndex];
+			itemCount = 0;
 		}
+		public void addItem(Item2 item, int i) {
+			items[itemCount] = item;
+			quantities[itemCount] = i;
+			itemCount++;
+		}
+		public double calculateTotal() {
+			double totalA = 0;
+			for(int i = 0; i < itemCount; i++) {
+				totalA += items[i].getPrice()*quantities[i];
+			}
+			return totalA;
+		}
+		public double calculateDiscountedTotal() {
+			double totalA = 0;
+			for(int i = 0; i < itemCount; i++) {
+				double price1 = items[i].getPrice();
+				double price2 = customer.applyDiscount(price1);
+				totalA += price2*quantities[i];
+			}
+			return totalA;
+		}
+		public void printOrderSummary() {
+			System.out.println("Order Summary for Customer : "+customer.toString());
+			System.out.println("-".repeat(20));
+			for(int i = 0; i < itemCount; i++) {
+				System.out.println("Item"+"\t"+"Quantity"+" "+"price");
+				System.out.println("-".repeat(20));
+				System.out.println(items[i].getName()+"\t"+quantities[i]+"\t "+items[i].getPrice()*quantities[i]);
+				System.out.println("-".repeat(20));
+				System.out.println("Total : "+(calculateTotal()-calculateDiscountedTotal()));
+				System.out.println("Discounted Total : "+calculateDiscountedTotal());
+				System.out.println("-".repeat(20));
+			}
 		
+		}
 
 	
 	}
