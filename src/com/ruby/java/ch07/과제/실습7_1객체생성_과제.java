@@ -114,10 +114,8 @@ class Order {
     		System.out.print(", orderDates = ");
     		System.out.print(orderDates[i]);
     		System.out.println(items[i].toString());
-
-    		
     	}
-    	calculateTotal();
+    	System.out.println("Total = "+calculateTotal());
     }
 }
 public class 실습7_1객체생성_과제 {
@@ -138,16 +136,16 @@ public class 실습7_1객체생성_과제 {
         Order order1 = new Order(boy, 5); // 최대 5개 아이템
         order1.addItem(laptop, 1, "2024-09-04");
         order1.addItem(tshirt, 2, "2024-09-04");
-        order1.addItem(phone, 1, "2024-09-04");
-        order1.addItem(headphones, 1, "2024-09-04");
-        order1.addItem(mouse, 1, "2024-09-04");
+//        order1.addItem(phone, 1, "2024-09-04");
+//        order1.addItem(headphones, 1, "2024-09-04");
+//        order1.addItem(mouse, 1, "2024-09-04");
 
         Order order2 = new Order(girl, 5); // 최대 5개 아이템
         order2.addItem(laptop, 2, "2024-09-04");
         order2.addItem(tshirt, 1, "2024-09-04");
-        order2.addItem(phone, 1, "2024-09-04");
-        order2.addItem(headphones, 1, "2024-09-04");
-        order2.addItem(mouse, 1, "2024-09-04");
+//        order2.addItem(phone, 1, "2024-09-04");
+//        order2.addItem(headphones, 1, "2024-09-04");
+//        order2.addItem(mouse, 1, "2024-09-04");
 
         // 주문 요약 출력
         order1.printOrderSummary();

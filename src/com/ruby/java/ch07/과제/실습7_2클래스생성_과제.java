@@ -144,16 +144,15 @@ class Order2 {
 		public void printOrderSummary() {
 			System.out.println("Order Summary for Customer : "+customer.toString());
 			System.out.println("-".repeat(20));
+			System.out.println("Item"+"\t"+"Quantity"+" "+"price");
+			System.out.println("-".repeat(20));
 			for(int i = 0; i < itemCount; i++) {
-				System.out.println("Item"+"\t"+"Quantity"+" "+"price");
-				System.out.println("-".repeat(20));
 				System.out.println(items[i].getName()+"\t"+quantities[i]+"\t "+items[i].getPrice()*quantities[i]);
-				System.out.println("-".repeat(20));
-				System.out.println("Total : "+(calculateTotal()-calculateDiscountedTotal()));
-				System.out.println("Discounted Total : "+calculateDiscountedTotal());
-				System.out.println("-".repeat(20));
 			}
-		
+			System.out.println("-".repeat(20));
+			System.out.println("Total : "+(calculateTotal()-calculateDiscountedTotal()));
+			System.out.println("Discounted Total : "+calculateDiscountedTotal());
+			System.out.println("-".repeat(20));
 		}
 
 	
