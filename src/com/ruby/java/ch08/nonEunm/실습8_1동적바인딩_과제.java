@@ -104,7 +104,7 @@ class Order extends SeasonalDiscount{
 	public double calculateTotal() {
 		double total = 0;
 		for(int i = 0; i < count; i++)
-			total = items[i].getPrice() * quantities[i];
+			total += items[i].getPrice() * quantities[i];
 		return total;
 	}
 
