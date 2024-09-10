@@ -78,27 +78,16 @@ package com.ruby.java.ch09.기본API;
 import java.util.Arrays;
 
 /*
-
-도서 관리 시스템은 다양한 책을 관리하고, 고객이 도서를 대여하거나 반납할 수 있게 하는 기능을 제공합니다. 또한, 고객의 대여 기록을 관리하고, 특정 조건에 맞는 책을 검색하거나 필터링하는 기능도 구현합니다.
-
-
-
+도서 관리 시스템은 다양한 책을 관리하고, 고객이 도서를 대여하거나 반납할 수 있게 하는 기능을 제공합니다. 
+또한, 고객의 대여 기록을 관리하고, 특정 조건에 맞는 책을 검색하거나 필터링하는 기능도 구현합니다.
 1단계: 기본 클래스 및 컬렉션 사용
-
 목표: Book 클래스 생성 및 기본 컬렉션 사용
-
 설계:
-
 Book 클래스: 제목, 저자, 출판 연도, ISBN 등을 속성으로 가짐
-
 Library 클래스: 도서 목록을 관리하는 기능 (책 추가, 책 목록 출력)
-
 과제:
-
 Book 클래스를 작성하고 도서 정보를 담는 객체를 생성하세요.
-
 Library 클래스를 작성해 ArrayList를 사용하여 도서를 관리하고, 도서 목록을 출력하세요.
-
  */
 
 // Book 클래스
@@ -109,7 +98,21 @@ class Book {
 	private String author;
 	private int publicationYear;
 	private String isbn;
+	
+	public Book() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Book (String title, String author, int publicationYear, String isbn) {
+		this.title = title;
+		this.author = author;
+		this.publicationYear = publicationYear;
+		this.isbn = isbn;
+	}
 
+	public String getTitle() {
+		return title;
+	}
 }
 
 
