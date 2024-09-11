@@ -28,6 +28,10 @@ abstract class Item {
 	public void show() {
 		
 	}
+
+	public void setQuantity(int quantities) {
+		stockQuantity -= quantities;
+	}
 }
 
 //Electronics 클래스: Item 클래스 상속
@@ -84,7 +88,7 @@ class Order extends SeasonalDiscount{
 	private Item[] items;      // 주문 제품들
 	private int[] quantities;  // 주문 제품 수량들
 	private String[] orderDates; // 주문일자들 
-	private static int count = 0;
+	private int count = 0;
 
 	public Order(Customer customer) {
 		super(0.05);
@@ -103,8 +107,8 @@ class Order extends SeasonalDiscount{
 
 	public double calculateTotal() {
 		double total = 0;
-		for(int i = 0; i < count; i++)
-			total = items[i].getPrice() * quantities[i];
+		for(int i = 0; i < count; i++) 
+			total += items[i].getPrice() * quantities[i];
 		return total;
 	}
 
@@ -115,6 +119,7 @@ class Order extends SeasonalDiscount{
 		for(int i=0; i < count; i++) {
 			System.out.println("-"+items[i].getName()+"x"+quantities[i]+"개:단가 W"+items[i].getPrice());
 			tt += quantities[i] * items[i].getPrice();
+			items[i].setQuantity(quantities[i]);
 		}
 		System.out.println("할인 미적용 총비용:W"+tt);
 	}

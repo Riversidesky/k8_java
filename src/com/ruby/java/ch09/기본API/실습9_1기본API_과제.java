@@ -100,7 +100,6 @@ class Book {
 	private String isbn;
 	
 	public Book() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Book (String title, String author, int publicationYear, String isbn) {
@@ -112,6 +111,12 @@ class Book {
 
 	public String getTitle() {
 		return title;
+	}
+	
+	@Override
+	public String toString() {
+		System.out.println("title="+title+", author="+author+", publicationYear="+publicationYear+", isbn="+isbn);
+		return null;
 	}
 }
 
@@ -125,10 +130,11 @@ class Library {
 	private Book[] books; // 도서들의 배열
 	private int top;
 	
-	public void printBooks(String msg) {
-		System.out.println(msg + " 도서숫자 = " + top);
-		//System.out.println(books[i].toString());
+	public Library() {
+		books = new Book[CAPACITY];
+		top = 0;
 	}
+
 
 	public void sortBooksByTitle(){
 		//String의 compareTo() 사용
@@ -139,33 +145,38 @@ class Library {
 		
 	}
 
-	public Book searchBookByTitle(String title) {
-
+	public Book searchBookByTitle(String bname) {
+		//equals() 사용
 	}
 
+
+	public void addBook(Book book) {
+		for(int i=0; i < top; i++) {
+			books[i] = book;
+		}
+		top++;
+	}
+
+	
+	public void printBooks(String msg) {
+		System.out.println(msg + " 도서숫자 = " + top);
+//		for(Book i : books) {
+//			System.out.println(i.toString());
+//		}
+		for(int i =0; i < top; i++) {
+			System.out.println(books[i].toString());
+		}
+	}
 }
 
 public class 실습9_1기본API_과제 {
 
 	public static void main(String[] args) {
-		Object obj = new Book();
-		obj.hashCode();
-		Book bk = new Book();
-		bk.hashCode();
+	
 
 		Library library = new Library();
-		String st = "java";
-		String st2 = "java";
-		//string interning
-		//the process of storing one unique instance of each distinct string value in a pool to optimize memory,
-		//so that multiple references to the same string literal point to the same memory location.
-
-		if (st.equals(st2))
-			System.out.println("st == st2");
 
 		// 5개의 Book 객체 초기화
-
-		// 5개의 책 객체 초기화
 
 		Book book1 = new Book("자바", "강감찬", 1995, "12");
 		Book book2 = new Book("파이썬", "이순신", 2008, "9");
