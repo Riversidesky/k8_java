@@ -113,10 +113,13 @@ class Book {
 		return title;
 	}
 	
+	public String getISBN() {
+		return isbn;
+	}
+	
 	@Override
 	public String toString() {
-		System.out.println("title="+title+", author="+author+", publicationYear="+publicationYear+", isbn="+isbn);
-		return null;
+		return "title="+title+", author="+author+", publicationYear="+publicationYear+", isbn="+isbn;
 	}
 }
 
@@ -132,28 +135,27 @@ class Library {
 	
 	public Library() {
 		books = new Book[CAPACITY];
-		top = 0;
 	}
 
 
 	public void sortBooksByTitle(){
 		//String의 compareTo() 사용
 		Arrays.sort(books, 0, top, (b1, b2) -> b1.getTitle().compareTo(b2.getTitle()));//9.3.3 Arrays 클래스
+		//books 참조변수배열 0부터 top까지 오름차순으로 제목비교후 정렬
 	}
 
 	public void sortBooksByISBN(){
-		
+		Arrays.sort(books, 0, top, (b1, b2) -> b1.getISBN().compareTo(b2.getISBN()));
 	}
 
 	public Book searchBookByTitle(String bname) {
 		//equals() 사용
+//		Arrays.sort(books, 0, top, (b1, b2) -> b1.getTitle().equals(b2.getTitle()));
 	}
 
 
 	public void addBook(Book book) {
-		for(int i=0; i < top; i++) {
-			books[i] = book;
-		}
+		books[top] = book;
 		top++;
 	}
 
