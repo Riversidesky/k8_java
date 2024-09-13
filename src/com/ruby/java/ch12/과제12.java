@@ -1,5 +1,7 @@
 package com.ruby.java.ch12;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.Arrays;
 
 //Book 클래스
@@ -92,10 +94,14 @@ class Library {
 public class 과제12 {
 	
 	private static void saveLibrary(Library library, String filename) {
+		try(ObjectInputStream library =
+				new ObjectInputStream(new FileInputStream(filename))) {
+			
+		}
 	}
 
 	private static Library loadLibrary(String string) {
-		return null;
+		return null; 
 	}
 	
     public static void main(String[] args) {

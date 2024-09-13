@@ -150,7 +150,12 @@ class Library {
 
 	public Book searchBookByTitle(String bname) {
 		//equals() 사용
-//		Arrays.sort(books, 0, top, (b1, b2) -> b1.getTitle().equals(b2.getTitle()));
+		for(int i=0; i < top; i++) {
+			if(books[i].getTitle().equals(bname)) {
+				return books[i];
+			}
+		}
+		return null;
 	}
 
 
@@ -226,7 +231,7 @@ public class 실습9_1기본API_과제 {
 		if (foundBook == null)
 			System.out.println("\n자바 책이 없다");
 		else
-			System.out.println("\n도서명으로 검색한 도서" + foundBook.toString());
+			System.out.println("\n도서명으로 검색한 도서 " + foundBook.toString());
 
 	}
 

@@ -64,6 +64,7 @@ class Library {
 
     public void sortBooksByISBN(){
         Arrays.sort(books, 0, top, (b1, b2) -> Integer.parseInt(b1.getISBN()) - Integer.parseInt(b2.getISBN()));
+        //ASCII 값 비교
     }
 
     public Book searchBookByTitle(String title) {
