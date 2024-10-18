@@ -94,8 +94,7 @@ class Library {
 public class 과제12 {
 	
 	private static void saveLibrary(Library library, String filename) {
-		try(ObjectInputStream library =
-				new ObjectInputStream(new FileInputStream(filename))) {
+		try(ObjectInputStream library = new ObjectInputStream(new FileInputStream(filename))) {
 			
 		}
 	}
