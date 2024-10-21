@@ -12,15 +12,39 @@ class PhyscData2 implements Comparable<PhyscData2>{
 	String name;
 	int height;
 	double vision;
+	
+	PhyscData2 (String name, int height, double vision) {
+		this.name = name;
+		this.height = height;
+		this.vision = vision;
+	}
+	
+	public PhyscData2(String name) {
+		this.name = name;
+	}
+
 
 	@Override
 	public String toString() {//[홍길동,162,0.3] 형태로 리턴한다 
-		
+		return "["+name+","+height+","+vision+"]";
 	}
 	@Override
 	public int compareTo(PhyscData2 p) {
-		// name 비교 버젼
-		// height 비교 버젼
+//		name 비교 버젼
+//		return name.compareTo(p.name);
+//		height 비교 버젼
+//		return height-p.height;
+		if (this.name.compareTo(p.name) > 0) return 1;
+		else if (this.name.compareTo(p.name) < 0) return -1;
+		else { // 같으면
+			if (this.height>p.height) return 1;
+			else if (this.height<p.height) return -1;
+			else {
+				if(this.vision>p.vision) return 1;
+				else if (this.vision<p.vision) return -1;
+				else return 0;
+			}
+		}
 	}
 
 }
@@ -60,7 +84,54 @@ public class train_실습3_6_1객체배열이진탐색 {
 		resultIndex = Arrays.binarySearch(data, key);//compareTo()를 사용되는지를 확인-이해할 수 있어야 한다 
 		System.out.println("\nArrays.binarySearch(<나동,164,0.6>): result index = " + resultIndex);
 	}
+	private static void showData(String s, PhyscData2[] d) {
+		System.out.println(s);
+		for(PhyscData2 dt : d) {
+			System.out.println(dt);
+		}
+	}
+	private static void sortData(PhyscData2[] d) { // ??
+		for(int i=1; i<d.length; i++) {
+			int j=i;
+			PhyscData2 tmp = d[i];
+			while(j>0 && d[j-1].compareTo(tmp)>0) {
+				d[j] = d[j-1];
+				j--;
+			}
+			d[j] = tmp;
+		}	
+	}
+	private static void reverse(PhyscData2[] d) {
+		for(int i=0; i<d.length/2; i++) {
+			swap(d, i, d.length-1-i);
+		}
+	}
+	private static void swap(PhyscData2[] d, int i, int j) {
+		PhyscData2 dt= d[i];
+		d[i] = d[j];
+		d[j] = dt;
+	}
 	
+	private static int linearSearch(PhyscData2[] d, PhyscData2 key) {
+		for(int i=0; i<d.length; i++) {
+			if(d[i].compareTo(key)==0)	return i;
+		}
+		return -1;
+	} 
 	
-
+	private static int binarySearch(PhyscData2[] d, PhyscData2 key) {
+		int pl =0;
+		int pr=d.length-1;
+		do {
+			int mid = (pl+pr) / 2;
+			if(d[mid].compareTo(key)==0)
+				return mid;
+			else if(d[mid].compareTo(key)<0)
+				pl = mid + 1;
+			else
+				pr = mid - 1;
+		} while(pl<=pr);
+		return -1;
+	} 
+	
 }

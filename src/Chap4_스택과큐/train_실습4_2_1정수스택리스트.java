@@ -19,7 +19,7 @@ import java.util.Scanner;
 class IntStack4 {
 	private List<Integer> stk; // 스택용 리스트
 	private int capacity; // 스택의 크기
-	private int top; // 스택 포인터
+	private int ptr; // 스택 포인터
 
 //--- 실행시 예외: 스택이 비어있음 ---//
 	public class EmptyIntStackException extends RuntimeException {
@@ -33,6 +33,7 @@ class IntStack4 {
 
 //--- 생성자(constructor) ---//
 	public IntStack4(int maxlen) {
+		
 //추가
 		try {
 		//추가

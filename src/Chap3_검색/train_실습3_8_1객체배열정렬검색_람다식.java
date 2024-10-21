@@ -1,5 +1,6 @@
 package Chap3_검색;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 /*
@@ -17,15 +18,47 @@ class Fruit4 {
 	String name;
 	int price;
 	String expire;
+	
+	Fruit4 (String name, int price, String expire) {
+		this.name = name;
+		this.price = price;
+		this.expire = expire;
+	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	@Override
+		public String toString() {
+			return name+","+price+"원,"+expire;
+		}
 }
 //교재 123~129 페이지 참조하여 구현
-class FruitName implements Comparator<Fruit4>{}
-class FruitPrice implements Comparator<Fruit4>{}
+class FruitName implements Comparator<Fruit4>{
 
-public class Test_실습3_7객체배열이진탐색 {
+	@Override
+	public int compare(Fruit4 o1, Fruit4 o2) {
+		if(o1.name.compareTo(o2.name) > 0) return 1;
+		else return -1;
+	}}
+class FruitPrice implements Comparator<Fruit4>{
 
-	private static void sortData(Fruit4[] arr, Comparator<Fruit4> cc_price) {}
+	@Override
+	public int compare(Fruit4 o1, Fruit4 o2) {
+		if(o1.price > o2.price) return 1;
+		else return -1;
+	}}
+
+public class train_실습3_8_1객체배열정렬검색_람다식 {
+
+	private static void sortData(Fruit4[] arr, Comparator<Fruit4> cc_price) {
+		Arrays.sort(arr, cc_price);
+	}
 
 	public static void main(String[] args) {
 
@@ -40,21 +73,24 @@ public class Test_실습3_7객체배열이진탐색 {
 		showData("정렬전 객체", arr);
 		
 		FruitName cc = new FruitName();
-		System.out.println("\n comparator cc 객체를 사용:: ");
+		System.out.println("\ncomparator cc 객체를 사용:: ");
 		Arrays.sort(arr, cc);
 		showData("Arrays.sort(arr, cc) Name 정렬 후", arr);
-		
+		System.out.println();
 		sortData(arr, new FruitPrice());
 		showData("Arrays.sort(arr, cc)  Price 실행후", arr);
+		System.out.println();
 		
 		// 람다식은 익명클래스 + 익명 객체이다
 		Comparator<Fruit4> cc_expire = (a, b) -> a.expire.compareTo(b.expire);
 		Arrays.sort(arr, cc_expire); // 람다식으로 만들어진 객체를 사용
 		showData("람다식 변수 cc_expire을 사용한 Arrays.sort(arr, cc) 정렬 후", arr);
+		System.out.println();
 		
 		Arrays.sort(arr, (a, b) -> a.getPrice() - b.getPrice()); 
 		showData("람다식: (a, b) -> a.getPrice() - b.getPrice()을 사용한 Arrays.sort(arr, cc) 정렬 후", arr);
-
+		System.out.println();
+		
 		System.out.println("\n익명클래스 객체로 정렬(가격)후 객체 배열: ");
 		Arrays.sort(arr, new Comparator<Fruit4>() {
 			@Override
@@ -97,6 +133,19 @@ public class Test_실습3_7객체배열이진탐색 {
 		sortData(arr, cc_price);
 		System.out.println("\ncomparator 정렬(가격)후 객체 배열: ");
 		showData("comparator를 사용한 정렬후:", arr);	
+	}
+
+	private static int binarySearch(Fruit4[] arr, Fruit4 newFruit4, Comparator<Fruit4> cc_price) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private static void showData(String string, Fruit4[] arr) {
+		System.out.println(string);
+		for(Fruit4 a : arr) {
+			System.out.println(a.toString());
+		}
+		
 	}
 }
 

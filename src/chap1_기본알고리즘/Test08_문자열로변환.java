@@ -1,4 +1,17 @@
 package chap1_기본알고리즘;
+class MyObject {
+	private int num;
+	
+	MyObject (int num) {
+		this.num = num;
+	}
+	
+	@Override
+	public String toString() {
+		return "" + num;
+	}
+}
+
 public class Test08_문자열로변환 {
 	
 	public static void main(String[] args) {

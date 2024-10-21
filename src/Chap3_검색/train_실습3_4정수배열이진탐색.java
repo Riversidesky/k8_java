@@ -7,7 +7,6 @@ package Chap3_검색;
 */
 import java.util.Arrays;
 import java.util.Random;
-//import java.util.Collections;
 //class A implements Comparable<A> { //comparable interface와 comparator interface를 구분 - 3장//comparator과 구분
 //	int num;
 //	@Override 
@@ -27,11 +26,11 @@ public class train_실습3_4정수배열이진탐색 {
 	static Random rand = new Random();
 	public static void main(String[] args) {
 //		String st = "hello";
-//		st.compareTo(st); //string 비교
+//		System.out.println(st.compareTo(st)); //string 비교
 //		A ax = new A();
 //		A bx = new A();
 //		if(ax.equals(bx)) {
-//			
+//			System.out.println("같다");
 //		}
 		
 		int []data = new int[30];
@@ -55,19 +54,45 @@ public class train_실습3_4정수배열이진탐색 {
 		resultIndex = binarySearch(data, key);//함수 구현이 필요
 		System.out.println("\nbinarySearch(19): key = " + key + ", result = " + resultIndex);
 		
-//		key = 10;
-//		/*
-//		 * 교재 115 Arrays.binarySearch에 의한 검색
-//		 */
-//		resultIndex = Arrays.binarySearch(data, key);
-//		System.out.println("\nArrays.binarySearch(10): result = " + resultIndex);
+		key = 10;
+		/*
+		 * 교재 115 Arrays.binarySearch에 의한 검색
+		 */
+		
+		int resultIndex2 = Arrays.binarySearch(data, key);
+		System.out.println("\nArrays.binarySearch(1	0): result = " + resultIndex2);
 
 	}
 	
 	private static boolean binarySearch(int[] data, int key) {
 		int pl = 0;
 		int pr = data.length-1;
+		
+		int pc = (pl+pr)/2;
+		
+		do {
+			if(data[pc] == key) {
+				return true;
+			} else if(data[pc] > key) {
+				pr = pc-1;
+			} else {
+				pr = pc+1;
+			}
+			
+		} while (pl <= pr);
+		
+//		 while (pl <= pr) {
+//		        if (data[pc] == key) {
+//		            return true; // 키를 찾았을 때
+//		        } else if (data[pc] > key) {
+//		            pr = pc - 1; // 왼쪽 서브 배열로 이동
+//		        } else {
+//		            pl = pc + 1; // 오른쪽 서브 배열로 이동
+//		        }
+//		    }
+
 		return false;
+		
 	}
 
 	private static boolean linearSearch(int[] data, int key) {
