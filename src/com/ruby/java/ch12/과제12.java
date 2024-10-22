@@ -1,11 +1,14 @@
 package com.ruby.java.ch12;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 
 //Book 클래스
-class Book {
+class Book implements Serializable {
 	private String title;
 	private String author;
 	private int publicationYear;
@@ -54,7 +57,7 @@ class Book {
 	
 }
 
-class Library { 
+class Library implements Serializable{ 
     static final int CAPACITY = 5;  // 기본 용량을 5로 설정
     private Book[] books; 
     private int top;
@@ -72,6 +75,11 @@ class Library {
     }
 
     public Book searchBookByTitle(String title) {
+    	for(int i=0; i < top; i++) {
+			if(books[i].getTitle().equals(title)) {
+				return books[i];
+			}
+		}
 		return null;
        
     }
@@ -94,13 +102,23 @@ class Library {
 public class 과제12 {
 	
 	private static void saveLibrary(Library library, String filename) {
-		try(ObjectInputStream library = new ObjectInputStream(new FileInputStream(filename))) {
-			
+		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))){
+			out.writeObject(library);
+			System.out.println("write");
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	private static Library loadLibrary(String string) {
-		return null; 
+		Library lib1 = new Library();
+		try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(string))) {
+			lib1 = (Library) in.readObject();
+			System.out.println("read");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return lib1;
 	}
 	
     public static void main(String[] args) {

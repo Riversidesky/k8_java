@@ -23,19 +23,29 @@ class IntStack4 {
 
 //--- 실행시 예외: 스택이 비어있음 ---//
 	public class EmptyIntStackException extends RuntimeException {
+
+		public EmptyIntStackException(String string) {
+			// TODO Auto-generated constructor stub
+		}
 //추가
 	}
 
 //--- 실행시 예외: 스택이 가득 참 ---//
 	public class OverflowIntStackException extends RuntimeException {
+
+		public OverflowIntStackException(String string) {
+			// TODO Auto-generated constructor stub
+		}
 //추가
 	}
 
 //--- 생성자(constructor) ---//
 	public IntStack4(int maxlen) {
-		
+		ptr = 0;
+		capacity = maxlen;
 //추가
 		try {
+			stk = new ArrayList<>(maxlen);
 		//추가
 		} catch (OutOfMemoryError e) { // 생성할 수 없음
 			capacity = 0;
@@ -46,6 +56,8 @@ class IntStack4 {
 	public void push(int x) throws OverflowIntStackException {
 		if (isFull()) // 스택이 가득 참
 			throw new OverflowIntStackException("push: stack overflow");
+		stk.add(x);
+		ptr++;
 //추가
 	}
 
@@ -53,6 +65,7 @@ class IntStack4 {
 	public int pop() throws EmptyIntStackException {
 		if (isEmpty()) // 스택이 빔
 			throw new EmptyIntStackException("pop: stack empty");
+		return stk.get(--ptr);
 //추가
 	}
 
@@ -60,6 +73,7 @@ class IntStack4 {
 	public int peek() throws EmptyIntStackException {
 		if (isEmpty()) // 스택이 빔
 			throw new EmptyIntStackException("peek: stack empty");
+		return stk.get(ptr-1);
 //추가
 	}
 
@@ -72,31 +86,45 @@ class IntStack4 {
 		 */
 		if (isEmpty()) // 스택이 빔
 			throw new EmptyIntStackException("peek: stack empty");
+		
+		int i = ptr;
+		while(i <= 0) {
+			stk.remove(i);
+			i--;
+		}
+		ptr = 0;
 //추가
 	}
 
 //--- 스택에서 x를 찾아 인덱스(없으면 –1)를 반환 ---//
 	public int indexOf(int x) {
+		for(int i=0; i<ptr; i++) {
+			if(stk.get(i) == x) return i;
+		} return -1;
 //추가
 	}
 
 //--- 스택의 크기를 반환 ---//
 	public int getCapacity() {
+		return capacity;
 		//추가
 	}
 
 //--- 스택에 쌓여있는 데이터 갯수를 반환 ---//
 	public int size() {
+		return ptr;
 	//추가
 	}
 
 //--- 스택이 비어있는가? ---//
 	public boolean isEmpty() {
+		return ptr <= 0;
 		//추가
 	}
 
 //--- 스택이 가득 찼는가? ---//
 	public boolean isFull() {
+		return ptr >= capacity;
 		//추가
 	}
 	
@@ -107,7 +135,9 @@ class IntStack4 {
 			throw new EmptyIntStackException("peek: stack empty");
 		}
 		else {
-			//추가할 부분
+			for(int i=0; i<ptr; i++) {
+				System.out.println(stk.get(i));
+			}
 		}
 	}
 }

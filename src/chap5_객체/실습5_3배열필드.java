@@ -13,7 +13,7 @@ class Person3 {
 	private float weight;
 	private String[] subjects;
 	private int[] years;
-	//private int count;
+	private int count;
 
 	// 필드
 	public void setName(String name) {
@@ -37,9 +37,9 @@ class Person3 {
 		// 기본 정보 출력::name=**, age=**, weight=**로 출력
 		System.out.println("name="+name+", age="+age+", weight="+weight);
 		// 교육과목 및 수강 연도 출력
-		for (int i=0; i < subjects.length; i++) {
-			System.out.print("교육과목="+subjects[i]+", 수강연도"+years[i]+"\n");
-		}
+//		for (int i=0; i < subjects.length; i++) {
+//			System.out.print("교육과목="+subjects[i]+", 수강연도"+years[i]+"\n");
+//		}
 
 		/*
 		 * while 문을 사용하여 교육과목과 수강연도를 출력
@@ -52,7 +52,22 @@ class Person3 {
 	}
 
 	void addSubjectYear(String subject, int year) {
-		미완성
+		String[] s = new String[subjects.length+1];
+		for(int i=0; i<subjects.length; i++) {
+			s[i] = subjects[i];
+		}
+		s[subjects.length] = subject;
+		
+		int[] y = new int[years.length+1];
+		for(int i=0; i<years.length; i++) {
+			y[i] = years[i];
+		}
+		y[years.length] = year;
+		
+		subjects = s;
+		years = y;
+		
+		
 	}//과목, 수강연도를 매개변수로 전달받아 배열에 추가
 }
 public class 실습5_3배열필드 {

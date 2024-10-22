@@ -24,11 +24,11 @@ public class GenMethodTest2 {
 		boolean b2 = i.isInclude(5.0, dnum);
 		System.out.println("결과 : " + b2);
 		
-		// isInclude("one", snum);
+//		 isInclude("one", snum);
 		
 //		GenMethodTest2.isInclude(3, inum);
 //		GenMethodTest2.isInclude(5.0, dnum);
-		//GenMethodTest.<String, String>isInclude("one", snum);
+//		GenMethodTest.<String, String>isInclude("one", snum);
 	}
 }
 

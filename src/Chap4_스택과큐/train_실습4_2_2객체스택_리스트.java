@@ -26,12 +26,21 @@ class Point2 {
 
 	@Override
 	public String toString() {
-	
+		return "ix = "+ix+", iy = "+iy;
 	}
 
 	@Override
 	public boolean equals(Object p) {
+		Point2 tm = (Point2) p;
+		return (ix==tm.getIx()&&iy==tm.getIy());
+	}
 
+	private int getIx() {
+		return ix;
+	}
+
+	private int getIy() {
+		return iy;
 	}
 }
 
@@ -39,11 +48,19 @@ class objectStack{
 	//--- 실행시 예외: 스택이 비어있음 ---//
 	// generic class는 Throwable을 상속받을 수 없다 - 지원하지 않는다
 	public class EmptyGenericStackException extends Exception {
+
+		public EmptyGenericStackException(String string) {
+			// TODO Auto-generated constructor stub
+		}
 //추가
 	}
 
 	//--- 실행시 예외: 스택이 가득 참 ---//
 	public class OverflowGenericStackException extends RuntimeException {
+
+		public OverflowGenericStackException(String string) {
+			// TODO Auto-generated constructor stub
+		}
 //추가
 	}
 
@@ -53,33 +70,55 @@ class objectStack{
 
 //--- 생성자(constructor) ---//
 	public objectStack(int capacity) {
+		this.capacity = capacity;
+		data = new ArrayList<>(capacity);
+		top = 0;
 		//구현
 	}
 
 //--- 스택에 x를 푸시 ---//
-	public boolean push(Point2 x) throws OverflowGenericStackException {
+	public void push(Point2 x) throws OverflowGenericStackException {
 		//구현
-
+		if (isFull()) {
+			throw new OverflowGenericStackException("스택이 가득참");
+		}
+		data.add(x);
+		top++;
 	}
 
 //--- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
 	public Point2 pop() throws EmptyGenericStackException  {
 		//구현
+		if (isEmpty()) {
+			throw new EmptyGenericStackException("스택이 빔");
+		}
+		return data.get(--top);
 	}
 
 //--- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
 	public Point2 peek() throws EmptyGenericStackException  {
 		//구현
+		if (isEmpty()) {
+			throw new EmptyGenericStackException("스택이 빔");
+		}
+		return data.get(top-1);
 	}
 
 //--- 스택을 비움 ---//
-	public void clear() {
+	public void clear() throws EmptyGenericStackException {
+		if (isEmpty()) {
+			throw new EmptyGenericStackException("스택이 빔");
+		}
+		data.clear();
 		top = 0;
 	}
 
 //--- 스택에서 x를 찾아 인덱스(없으면 –1)를 반환 ---//
 	public int indexOf(Point2 x) {
 		//구현
+		for(int i=0; i<top; i++) {
+			if (data.get(i).equals(x)) return i;
+		} return -1;
 	}
 
 //--- 스택의 크기를 반환 ---//
@@ -105,6 +144,9 @@ class objectStack{
 //--- 스택 안의 모든 데이터를 바닥 → 꼭대기 순서로 출력 ---//
 	public void dump() {
 		//구현
+		for(int i=0; i<top; i++) {
+			System.out.println(data.get(i));
+		}
 	}
 }
 public class train_실습4_2_2객체스택_리스트 {

@@ -1,6 +1,7 @@
 package com.ruby.java.ch11.exception;
 
 import java.util.Arrays;
+
 //Overflow 예외 클래스
 class OverflowException extends RuntimeException { //교재 553
  public OverflowException(String message) {
@@ -16,47 +17,42 @@ class UnderflowException extends RuntimeException {
 }
 //Book 클래스
 class Book {
-	private String title;
-	private String author;
-	private int publicationYear;
-	private String isbn;
-
-	public Book (String title, String author, int publicationYear, String isbn) {
-		this.title = title;
-		this.author = author;
-		this.publicationYear = publicationYear;
-		this.isbn = isbn;
-	}
-	
-	public String getTitle() {
-		return title;
-	}
-	
-	public String getISBN() {
-		return isbn;
-	}
-
+ private String title;
+ private String author;
+ private int publicationYear;
+ private String isbn;
+ 
+ public Book (String title, String author, int publicationYear, String isbn) {
+	 this.title = title;
+	 this.author = author;
+	 this.publicationYear = publicationYear;
+	 this.isbn = isbn;
+ }
+ 
+ public String getTitle() {
+	// TODO Auto-generated method stub
+	return title;
 }
+ public String getISBN() {
+	// TODO Auto-generated method stub
+	return isbn;
+}
+ 
+ public String toString() {
+		return "title="+title+", author="+author+", publicationYear="+publicationYear+", isbn="+isbn;
+	}
+ 
+
+ }
 
 class Library { 
     static final int CAPACITY = 5;  // 기본 용량을 5로 설정
     private Book[] books; 
     private int top;
-    
+
     public Library() {
     	books = new Book[CAPACITY];
-    	top = 0;
     }
-    
-    public void addBook(Book bk) {
-    	if (top >= CAPACITY) {
-    		System.out.println("더 이상 추가 안됨");
-    		throw new OverflowException("overflow");
-    	}
-    	else {
-    		books[top++] = bk;	    		
-    	}
-	}
   
     public void sortBooksByTitle(){
         Arrays.sort(books, 0, top, (b1, b2) -> b1.getTitle().compareTo(b2.getTitle()));
@@ -64,48 +60,63 @@ class Library {
 
     public void sortBooksByISBN(){
         Arrays.sort(books, 0, top, (b1, b2) -> Integer.parseInt(b1.getISBN()) - Integer.parseInt(b2.getISBN()));
-        //ASCII 값 비교
     }
 
     public Book searchBookByTitle(String title) {
+    	for(int i=0; i < top; i++) {
+			if(books[i].getTitle().equals(title)) {
+				return books[i];
+			}
+		}
 		return null;
-       
     }
 
-	public void removeBook() {
-		// TODO Auto-generated method stub
-		
+	public void addBook(Book b) {
+		if (top >= CAPACITY) {
+			throw new OverflowException("OverflowException 발생");
+		}
+		books[top] = b;
+		top++;
 	}
-
+	
 	public void printBooks(String msg) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(msg + " 도서숫자 = " + top);
+		for(int i =0; i < top; i++) {
+			System.out.println(books[i].toString());
+		}
 	}
-    
 
+	public void removeBook() {
+		if (top <= 0) {
+			throw new UnderflowException("UnderflowException 발생");
+		}
+		books[top-1] = null;
+		top--;
+	}
 }
+
+
 public class 실습11_1_예외처리_과제 {
     public static void main(String[] args) {
-    	try {
-    	String s = new String("java");
-    	System.out.println(s.length());
-    	s = null;
-    	System.out.println(s.length());
-    	int []arr = new int[2];
-    	arr[2] = 10;
-    	} catch(ArrayIndexOutOfBoundsException e1) {//교재534
-    		System.out.println("배열 색인 예외 발생");
-    		System.out.println(e1.getMessage());
-    	} catch(NullPointerException e2) {
-    		System.out.println("널 포인터 예외 발생");
-    		e2.printStackTrace();
-    	} catch(Exception e) { // 모든예외처리는 마지막에 와야함
-    		System.out.println("예외 발생");
-    		System.out.println(e.getMessage());
-    	} finally {
-    		System.out.println("모든 것이 ok");//교재 543
-    		//할당된 자원을 자동으로 해제가 아니고 close(file)을 포함해야 한다
-    	}
+//    	try {
+//    	String s = new String("java");
+//    	System.out.println(s.length());
+//    	s = null;
+//    	System.out.println(s.length());
+//    	int []arr = new int[2];
+//    	arr[2] = 10;
+//    	} catch(ArrayIndexOutOfBoundsException e1) {//교재534
+//    		System.out.println("배열 색인 예외 발생");
+//    		System.out.println(e1.getMessage());
+//    	} catch(NullPointerException e2) {
+//    		System.out.println("널 포인터 예외 발생");
+//    		e2.printStackTrace();
+//    	} catch(Exception e) {
+//    		System.out.println("예외 발생");
+//    	} finally {
+//    		System.out.println("모든 것이 ok");//교재 543
+//    		//할당된 자원을 자동으로 해제가 아니고 close(file)을 포함해야 한다
+//    	}
     	
         Library library = new Library();
 

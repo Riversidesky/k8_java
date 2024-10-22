@@ -7,7 +7,7 @@ package Chap4_스택과큐;
  * num 변수를 사용하지 않고 front == rear 일 때 queue가 full인지 empty 인지를 판단
  * 큐에서는 예외 클래스를 만드는 연습
  */
- */
+
 import java.util.Random;
 /*
  * 큐 1번 실습 코드 - 정수들의 큐
@@ -24,6 +24,7 @@ class IntQueue3 {
 	private int capacity; // 큐의 크기
 	private int front; // 맨 처음 요소 커서
 	private int rear; // 맨 끝 요소 커서
+	private int num;
 	boolean isEmptyTag;
 
 //--- 실행시 예외: 큐가 비어있음 ---//
@@ -40,32 +41,57 @@ class IntQueue3 {
 
 //--- 생성자(constructor) ---//
 	public IntQueue3(int maxlen) {
-
+		num = front = rear = 0;
+		capacity = maxlen;
+		try {
+			que = new int[capacity];
+		} catch (OutOfMemoryError e) {
+			capacity = 0;
+		}
 	}
 
 //--- 큐에 데이터를 인큐 ---//
 	public int enque(int x) throws OverflowIntQueue3Exception {
-
+		if (num >= capacity)
+			throw new OverflowIntQueue3Exception();
+		que[rear++] = x;
+		num++;
+		if (rear == capacity)
+			rear = 0;
+		return x;
 	}
 
 //--- 큐에서 데이터를 디큐 ---//
 	public int deque() throws EmptyIntQueue3Exception {
-
+		if (num <= 0)
+			throw new EmptyIntQueue3Exception();
+		int x = que[front++];
+		num--;
+		if(front == capacity)
+			front = 0;
+		return x;
 	}
 
 //--- 큐에서 데이터를 피크(프런트 데이터를 들여다봄) ---//
 	public int peek() throws EmptyIntQueue3Exception {
-
+		if (num <= 0)
+			throw new EmptyIntQueue3Exception();
+		return que[front];
 	}
 
 //--- 큐를 비움 ---//
 	public void clear() {
-
+		num = front = rear = 0;
 	}
 
 //--- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {
-
+		for(int i=0; i<num; i++) {
+			int idx = (i+front) % capacity;
+			if(que[idx] == x) 
+				return idx;
+		}
+		return -1;
 	}
 
 //--- 큐의 크기를 반환 ---//
@@ -90,6 +116,13 @@ class IntQueue3 {
 
 //--- 큐 안의 모든 데이터를 프런트 → 리어 순으로 출력 ---//
 	public void dump() {
+		if (num <= 0)
+			System.out.println("큐가 비어있습니다.");
+		else {
+			for (int i=0; i<num; i++) 
+				System.out.println(que[(i+front) % capacity] + " ");
+			System.out.println();
+		}
 
 	}
 }

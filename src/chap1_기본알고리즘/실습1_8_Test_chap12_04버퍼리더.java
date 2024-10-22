@@ -50,19 +50,29 @@ public class 실습1_8_Test_chap12_04버퍼리더 {
         }
     }
 
-    // 문자열 배열을 정수 배열로 변환하고 정렬하는 함수
+ // 문자열 배열을 정수 배열로 변환하고 정렬하는 함수
     public static int[] convertSortToInt(String[] stringArray) {
-
+    	int[] sa = new int[stringArray.length];	
+    	for (int i=0; i<stringArray.length; i++) {
+    		sa[i] = Integer.parseInt(stringArray[i]);
+    	}
+    	return sa;
     }
 
     // 문자열 배열 출력 함수
     public static void printStringArray(String[] array) {
-
+    	for(String a : array) {
+    		System.out.print(a);
+    		System.out.print(" ");
+    	}
     }
 
     // 정수 배열 출력 함수
     public static void printIntArray(int[] array) {
-
+    	for(int a : array) {
+    		System.out.print(a);
+    		System.out.print(" ");
+    	}
     }
 
     public static void main(String[] args) {
@@ -72,6 +82,7 @@ public class 실습1_8_Test_chap12_04버퍼리더 {
         String[] sortedStringArray = readSortFromFile(filename);
         System.out.println("파일에서 읽은 스트링의 정렬:");
         printStringArray(sortedStringArray);
+        System.out.println();
         
         // 문자열 배열을 정수 배열로 변환하고 정렬 후 출력
         int[] sortedIntArray = convertSortToInt(sortedStringArray);
