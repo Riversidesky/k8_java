@@ -198,16 +198,48 @@ public class train_QueenEight_구현실습과제 {
 	}
 	//배열 d에서 행 cx, 열 cy에 퀸을 남서, 북동 대각선으로 배치할 수 있는지 조사
 	public static boolean checkDiagSW(int[][] d, int cx, int cy) { // x++, y-- or x--, y++ where 0<= x,y <= 7
-
+		while(true) {
+			int x = cx;
+			int y = cy;
+			if(d[x][y] == 1) return false;
+			x++;
+			y--;
+			if(x >= 8 || y <= 0) break;
+		}
+		while(true) {
+			int x = cx;
+			int y = cy;
+			if(d[x][y] == 1) return false;
+			x--;
+			y++;
+			if(x <= 0 || y >= 8) break;
+		}
+		return true;
 	}
 
 	//배열 d에서 행 cx, 열 cy에 퀸을 남동, 북서 대각선으로 배치할 수 있는지 조사
 	public static boolean checkDiagSE(int[][] d, int cx, int cy) {// x++, y++ or x--, y--
-
+		while(true) {
+			int x = cx;
+			int y = cy;
+			if(d[x][y] == 1) return false;
+			x++;
+			y++;
+			if(x >= 8 || y >= 8) break;
+		}
+		while(true) {
+			int x = cx;
+			int y = cy;
+			if(d[x][y] == 1) return false;
+			x--;
+			y--;
+			if(x <= 0 || y <= 0) break;
+		}
+		return true;
 	}
 	//배열 d에서 (x,y)에 퀸을 배치할 수 있는지  조사
 	public static boolean checkMove(int[][] d, int x, int y) {// (x,y)로 이동 가능한지를 check
-
+		
 	}
 	//배열 d에서 현재 위치(row,col)에 대하여 다음에 이동할 위치 nextCol을 반환, 이동이 가능하지 않으면 -1를 리턴
 	public static int nextMove(int[][] d, int row, int col) {// 현재 row, col에 대하여 이동할 col을 return
