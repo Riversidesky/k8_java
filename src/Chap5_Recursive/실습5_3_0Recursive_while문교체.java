@@ -7,16 +7,28 @@ package Chap5_Recursive;
 
 import java.util.Scanner;
 
-class 실습5_3_0Recursive {
+class 실습5_3_0Recursive_while문교체 {
  //--- 순수 재귀 메서드 ---//
  static void recur(int n) {
+	 Stack<Integer> s = new Stack<Integer>(n); // 4장
+	 while(true) { //***
      if (n > 0) {
-//    	 System.out.println("recur(" + n + " - 1) 호출됨");
-         recur(n - 1);
-         System.out.println("n = " + n);
-//         System.out.println("recur(" + n + " - 2) 호출됨");
-         recur(n - 2);
+    	 System.out.println("recur(" + n + " - 1) 호출됨");
+//         recur(n - 1);
+		 s.push(n); // n값 저장
+		 n = n-1;
+		 continue;
      }
+     if (s.isEmpty() != true) {
+    	 n = s.pop();
+     }
+         System.out.println("n = " + n);
+         System.out.println("recur(" + n + " - 2) 호출됨");
+//         recur(n - 2);
+         n = n-2; // ***
+         continue;
+     }
+	 break;
  }
 
  public static void main(String[] args) {

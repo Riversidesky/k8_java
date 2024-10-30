@@ -27,3 +27,5 @@ public class 실습5_1_2피보나치수열 {
      System.out.println(x + "의 피보나치 수열은 " + fibonacci(x) + "입니다.");
  }
 }
+
+// 1 1 2 3 5 8 13 21 34 55 89
