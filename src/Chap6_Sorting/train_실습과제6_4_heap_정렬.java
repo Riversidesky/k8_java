@@ -15,7 +15,7 @@ class Heap implements MaxHeap {
 	private int MaxSize; // Maximum allowable size of MaxHeap
 	
 	public Heap(int sz) {
-
+		heap = new int[heapSize];
 	}
 
 	public void display() {//heap 배열을 출력한다. 배열 인덱스와 heap[]의 값을 출력한다.
@@ -53,7 +53,7 @@ class Heap implements MaxHeap {
 		System.out.println("Heap Full");
 	}
 }
-public class 실습6_16_1heap정렬 {
+public class train_실습과제6_4_heap_정렬 {
 	 static void showData(int[] d) {
 
 	 }

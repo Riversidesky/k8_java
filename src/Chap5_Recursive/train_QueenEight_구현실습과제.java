@@ -172,9 +172,22 @@ public class train_QueenEight_구현실습과제 {
 			if (st.isEmpty() && ix == 8) //ix가 8이면 8개 배치 완료, stack이 empty가 아니면 다른 해를 구한다 
 				break;
 			if ((iy = nextMove(data, ix, iy))== -1) {//다음 이동할 열을 iy로 주는데 -1이면 더이상 이동할 열이 없음을 나타냄
-				break;
+				try {
+				p = st.pop();
+				} catch (Stack4.EmptyGenericStackException e) { // 내부클래스 Stack4는 앞에 Stack4를 붙여줘야에러가 안남
+					e.printStackTrace();
+				}
+				ix = p.getIx();
+				iy = p.getIy();
+				iy++;
+				continue;
 			}
-
+			data[ix][iy] = 1;
+			p = new Point(ix, iy);
+			st.push(p);
+			count++;
+			ix++;
+			iy=0;
 			if (count == 8) { //8개를 모두 배치하면
 				break;
 			}
@@ -239,11 +252,17 @@ public class train_QueenEight_구현실습과제 {
 	}
 	//배열 d에서 (x,y)에 퀸을 배치할 수 있는지  조사
 	public static boolean checkMove(int[][] d, int x, int y) {// (x,y)로 이동 가능한지를 check
-		
-	}
+		if(checkRow(d, x) && checkCol(d, y) && checkDiagSW(d, x, y) && checkDiagSE(d, x, y)) {
+			return true;
+		}
+		return false;
+  	}
 	//배열 d에서 현재 위치(row,col)에 대하여 다음에 이동할 위치 nextCol을 반환, 이동이 가능하지 않으면 -1를 리턴
 	public static int nextMove(int[][] d, int row, int col) {// 현재 row, col에 대하여 이동할 col을 return
-		return -1;
+		// d[1][0]에서 다음col 위치 값 nextCol
+		int nextCol = 0; // ?
+		if(!checkMove(d, row, nextCol)) return -1;
+		return nextCol;
 	}
 
 	static void showQueens(int[][] data) {// 배열 출력
